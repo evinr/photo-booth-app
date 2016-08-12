@@ -1,0 +1,258 @@
+/* -----------Smartphone View----------- */ 
+@media only screen and (max-width : 480px)   {
+	main.container {
+    	padding-top: 85px;
+	}
+
+	div.card {
+		width: 90%;
+		margin: 5%;
+	}
+
+	div.modalDialog > div {
+	    width: 100%;
+	 	height: 100vh;
+	     margin: 0 auto;
+	     padding: 0;
+	}
+}
+
+@media only screen and (max-height : 400px)   {
+	div.modalDialog > div {
+	    width: 100%;
+	 	height: 100vh;
+	     margin: 0 auto;
+	     padding: 0;
+	}
+}
+
+/* -----------Universal Views----------- */ 
+button::-moz-focus-inner {
+	border: 0;
+}
+html, body { 
+	height: 100%;
+	margin: 0 auto;
+	background-color: rgba(189, 195, 199,1.0);
+	font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
+	color: #2c3e50;
+}
+
+body { 
+	background-image: url('./bg.jpg');
+	background-size: cover;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-position: center; }
+
+h3 {
+	padding-left: 15px;
+}
+
+/* Header stlyings */
+header {
+	position: fixed;
+	z-index: 999;
+	margin: 0 auto;
+	width: 100%;
+	background-color: #2c3e50;
+
+}
+
+h1 {
+	margin: 0 auto;
+	padding: 15px 5px 10px 5px;
+	color: #ecf0f1;
+	font-size: 20px;
+	text-align: center;
+}
+
+main { 
+	padding-top: 60px;
+}
+
+/* Card stlyings */
+.card {
+	padding-bottom: 125px;
+	background: #fff;
+	margin: 3%;
+	width: 44%;
+	position: relative;
+	float: left;
+	overflow: hidden;
+	border-radius: 2px;
+	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+	font-size: 0.9em;
+	transition: width 400ms ease-in-out, left 400ms ease-in-out;
+}
+
+.content {
+	position: absolute; 
+	height: 39%;
+	width: 100%;
+}
+
+.content p {
+	margin: 1em;
+}
+
+.buttons {
+	float: right;
+	margin-right: 1em;
+}
+
+.prev {
+	left: 0px;
+}
+
+.flat-button {
+	border: none;
+    border-radius: 2px;
+    outline: 0;
+ 	text-transform: uppercase;
+    box-shadow: none;
+    background-color: transparent;
+    height: 30px;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
+}
+
+/* Modal Overlay */
+
+.modalDialog {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 99999;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+    opacity:0;
+    pointer-events: none;
+}
+
+#viewPageWrapper {
+	height: 450px;
+	overflow: hidden;
+	width: 100%;
+}
+
+#myDialog {
+	padding: 5px;
+	margin: 0;
+	color: #95a5a6;
+}
+
+.modalDialog-active {
+    opacity:1;
+    pointer-events: auto;
+}
+
+.modalDialog > div {
+    width: 315px;
+    position: relative;
+    margin: 10% auto;
+    padding: 5px 10px 13px 20px;
+    border-radius: 3px;
+    background: #fff;
+}
+
+#close {
+	padding: 10px;
+	top: 0;
+	font-size: larger;
+}
+
+#viewPageWrapper h2 {
+	margin-top: 0px;
+	margin-left:  15px;
+	margin-right: 10px;
+	margin-bottom: 5px;
+	color: #2c3e50;
+}
+
+#viewPageWrapper p {
+	margin-top: 0px;
+	padding: 10px;
+	font-size: 16px;
+	max-height: 225px;
+	overflow-y: auto;
+}
+
+button.save { 
+	position: absolute;
+	left: 41%;
+	bottom: 4%;
+	height: 75px;
+	width: 75px;
+	border-radius: 50%;
+	background-color: #22A7F0;
+	color: white;
+}
+
+/* Star  */
+
+.star-five {
+   margin: 50px 0;
+   position: relative;
+   display: block;
+   color: gold;
+   width: 0px;
+   height: 0px;
+   border-right:  100px solid transparent;
+   border-bottom: 70px  solid gold;
+   border-left:   100px solid transparent;
+   -moz-transform:    rotate(35deg);
+   -webkit-transform: rotate(35deg);
+   -ms-transform:     rotate(35deg);
+   -o-transform:      rotate(35deg);
+}
+.star-five:before {
+   border-bottom: 80px solid gold;
+   border-left: 30px solid transparent;
+   border-right: 30px solid transparent;
+   position: absolute;
+   height: 0;
+   width: 0;
+   top: -45px;
+   left: -65px;
+   display: block;
+   content: '';
+   -webkit-transform: rotate(-35deg);
+   -moz-transform:    rotate(-35deg);
+   -ms-transform:     rotate(-35deg);
+   -o-transform:      rotate(-35deg);
+
+}
+.star-five:after {
+   position: absolute;
+   display: block;
+   color: gold;
+   top: 3px;
+   left: -105px;
+   width: 0px;
+   height: 0px;
+   border-right: 100px solid transparent;
+   border-bottom: 70px solid gold;
+   border-left: 100px solid transparent;
+   -webkit-transform: rotate(-70deg);
+   -moz-transform:    rotate(-70deg);
+   -ms-transform:     rotate(-70deg);
+   -o-transform:      rotate(-70deg);
+   content: '';
+}
+
+
+/* Catagory Selector Buttons */
+.toggles {
+	/* best centering technique ever! */
+	position: absolute; 
+	top: 5%;
+	left: 50%;
+	transform: translate(-50%, -50%); 
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Video Capture Example</title>
+	<meta name='viewport' content='width=device-width, initial-scale=1.0' />
+	<script src='./app.js'></script>
+    <!-- <link rel='stylesheet' type='text/css' href='./style.css'> -->
+	<style type='text/css'>
+		body {
+			background-color: black;
+		}
+		video {
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			right: 0;
+		}
+
+		canvas {
+			display: none;
+		}
+
+		button {
+			border-radius: 50%;
+			height:  50px;
+			width:  50px;
+			background-color:  red;
+			position: absolute;
+			bottom: 75px;
+			right:  75px;
+			transform: translate(50%,50%);
+		}
+
+		form {
+			z-index: 99999999;
+		}
+	   
+	</style>
+</head>
+<body>
+	<video id='video' width='1280' height='720' autoplay>
+		Your browser does not support the video tag.
+	</video>
+	<button id='snap'>Snap</button>
+	<canvas id='canvas' width='320' height='240'></canvas>
+	 	<form ref='uploadForm' 
+            id='uploadForm' 
+            action='http://localhost:8081/doPost' 
+            method='post' 
+            encType="multipart/form-data">
+                <input type="file" name="sampleFile" />
+                <input type='submit' value='Upload!' />
+        </form>		
+</body>
+
+<script>
+
+</script>
+</html>
