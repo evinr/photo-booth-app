@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 var exec = require('child_process').exec;
 var dive = require('dive');
 
-var fileUpload = require('express-fileupload');
+var fileUpload = require('express-fileupload'); // Not sure why removing this breaks upload ability
 
 
 
@@ -20,14 +20,15 @@ expressapp.use(fileUpload());
 
 
 var listValues = []; // this needs to be global because trying to do it async is tricky since it is the command line
-var baseDir = '/photos/'; // this is the folder where the pages/apps live that are being managed
+var baseDir = __dirname + '/photos/'; // this is the folder where the pages/apps live that are being managed
 
 
 //Maps requests to the ./resources folder for static assets
 expressapp.use(express.static(__dirname + '/resources'));
+//Maps to the images that get captured
+expressapp.use('/images', express.static(baseDir));
 
-
-//Demo of Request to post a form
+//Endpoint for uploading an image via POST as a base-64 string
 expressapp.post('/uploadImage', function(req, res){
     var image = req.param('pic');
     var fileName = Date.now();
@@ -43,7 +44,7 @@ expressapp.post('/uploadImage', function(req, res){
 //need to be able to store file structure as a global object
 var refreshListValues = function () {
     listValues = [];
-    dive(process.cwd() + baseDir, { recursive: false, directories: false, files: true }, function(err, dir) {
+    dive(baseDir, { recursive: false, directories: false, files: true }, function(err, dir) {
           if (err) throw err;
           listValues.push(dir.split(baseDir)[1]);
     }); 
@@ -56,6 +57,7 @@ refreshListValues();
 expressapp.get('/list', function(req, res) {
     res.setHeader('Content-Type', 'application/json');
     res.send({ 'files': listValues });
+    refreshListValues(); //make sure to refresh the list just incase anything outside the happy path is up-to-date
 })
 
 

@@ -73,7 +73,7 @@ main {
 
 /* Card stlyings */
 .card {
-	padding-bottom: 125px;
+	height: 28vw;
 	background: #fff;
 	margin: 3%;
 	width: 44%;
@@ -84,16 +84,37 @@ main {
 	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 	font-size: 0.9em;
 	transition: width 400ms ease-in-out, left 400ms ease-in-out;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center; 
 }
 
-.content {
-	position: absolute; 
-	height: 39%;
-	width: 100%;
+.menu {
+	border: none;
+    border-radius: 2px;
+    outline: 0;
+/*     padding: 0 2rem;
+ */    text-transform: uppercase;
+        box-shadow: none;
+    background-color: transparent;
+	position: absolute;
+	right: 7px;
+	top: 7px;
+	width: 20px;
+	height:40px;
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    -webkit-justify-content: center;
+    align-items: center; 
 }
 
-.content p {
-	margin: 1em;
+.menu-dot {
+	border-radius: 50%;
+	margin-bottom: 3px;
+	height: 7px;
+	width: 7px;
+	background-color: white;
 }
 
 .buttons {

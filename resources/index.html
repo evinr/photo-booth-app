@@ -1,47 +1,107 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title>Photo Booth Capture Page</title>
-	<meta name='viewport' content='width=device-width, initial-scale=1.0' />
-	<script src='./app.js'></script>
-    <!-- <link rel='stylesheet' type='text/css' href='./style.css'> -->
-	<style type='text/css'>
-		body {
-			background-color: black;
-		}
-		video {
-			width: 100%;
-			height: 100%;
-			position: absolute;
-			top: 0;
-			right: 0;
-		}
+  <html>
+    <head>
+      <title>Image Display for Photo Booth</title>
+      <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+      <style type='text/css'>
+        /* Loading Spinner 
+          partial CSS is inline to improve first paint performace 
+         */
+        .loader {
+          font-size: 10px;
+          margin: 0px auto;
+          text-indent: -9999em;
+          width: 11em;
+          height: 11em;
+          border-radius: 50%;
+          background: #ffffff;
+          background: -moz-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+          background: -webkit-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+          background: -o-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+          background: -ms-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+          background: linear-gradient(to right, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+          position: relative;
+          -webkit-animation: load3 1.4s infinite linear;
+          animation: load3 1.4s infinite linear;
+          -webkit-transform: translateZ(0);
+          -ms-transform: translateZ(0);
+          transform: translateZ(0);
+          overflow: hidden;
+        }
+        .loader:before {
+          width: 50%;
+          height: 50%;
+          background: #ffffff;
+          border-radius: 100% 0 0 0;
+          position: absolute;
+          top: 0;
+          left: 0;
+          content: '';
+        }
+        .loader:after {
+          background: rgba(189, 195, 199,1.0);
+          width: 75%;
+          height: 75%;
+          border-radius: 50%;
+          content: '';
+          margin: auto;
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          right: 0;
+        }
+        @-webkit-keyframes load3 {
+          0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+          }
+          100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+          }
+        }
+        @keyframes load3 {
+          0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+          }
+          100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+          }
+        }
 
-		canvas {
-			display: none;
-		}
+        .modalDialog {
+        	opacity:0;
+        	pointer-events: none;
+        }
 
-		button {
-			border-radius: 50%;
-			height:  50px;
-			width:  50px;
-			background-color:  red;
-			position: absolute;
-			bottom: 10%;
-			right:  50%;
-			transform: translate(50%,50%);
-		}
-	   
-	</style>
-</head>
-<body>
-	<video id='video' width='1280' height='720' autoplay>
-		Your browser does not support the video tag.
-	</video>
-	<button id='snap'>Snap</button>
-	<canvas id='canvas' width='320' height='240'></canvas>	
-</body>
-
+      </style>
+  </head>
+  <body>
+    <header>
+      <h1>Image Display for Photo Booth</h1>
+    </header>
+    <div class='loader'>Loading...</div>
+      <main class='container'>
+      </main>
+      <div class='modalDialog' role='dialog' aria-labelledby='myDialog'>
+      	<div>
+          <button id='close' title='Close' class='flat-button close'>X</button>
+          <h2 id='myDialog'>Email Me</h2>
+          <section id='modalViewPage'>
+            <section id='viewPageWrapper'>
+          
+            </section>  
+          </section>
+          <button class='flat-button prev'>Previous</button>
+          <button class='flat-button next'>Next</button>
+      	</div>
+      </div>
+  </body>
+  <script src='/app.js'></script>
+  <link rel='stylesheet' type='text/css' href='/style.css'>
 <script>
 
 </script>
