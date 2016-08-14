@@ -12,17 +12,14 @@ var fileUpload = require('express-fileupload');
 
 
 // Needed for cloud sync functionality
-var Firebase = require('firebase');
+// var Firebase = require('firebase');
 
 //Configuring middleware
 expressapp.use(bodyParser())
 expressapp.use(fileUpload());
 
 
-
-
-
-var listValues = [];
+var listValues = []; // this needs to be global because trying to do it async is tricky since it is the command line
 var baseDir = '/photos/'; // this is the folder where the pages/apps live that are being managed
 
 
@@ -31,70 +28,34 @@ expressapp.use(express.static(__dirname + '/resources'));
 
 
 //Demo of Request to post a form
-expressapp.post('/doPost', function(req, res){
-    // console.log(req);
+expressapp.post('/uploadImage', function(req, res){
+    var image = req.param('pic');
+    var fileName = Date.now();
+    var data = image.replace(/^data:image\/\w+;base64,/, '');
 
-    var sampleFile;
- 
-    if (!req.files) {
-        res.send('No files were uploaded.');
-        return;
-    }
- 
-    sampleFile = req.files.sampleFile;
-    sampleFile.mv('/photos/filename.jpg', function(err) {
-        if (err) {
-            res.status(500).send(err);
-        }
-        else {
-            res.send('File uploaded!');
-        }
-    });
-    // console.log('pic: ' + req.params('pic'));
-
-    // res.send('The post was successful: ' + req.param('username'));
-
+    fs.writeFile(__dirname + '/photos/' + fileName + '.png', data, {encoding: 'base64'}, function(err){});
+    res.send('The post was successful');
+    // reset the list of images in the for the frontend API
+    refreshListValues();
 })
-
-//How to use the command line from the web
-expressapp.get('/commandLine', function (req, res) {
-    exec('curl https://www.google.com',
-        function (error, stdout, stderr) {
-        console.log('stdout: ' + stdout);
-        res.send( stdout);
-    });
-})
-
 
 
 //need to be able to store file structure as a global object
 var refreshListValues = function () {
     listValues = [];
-    dive(process.cwd() + baseDir, { recursive: false, directories: true, files: false }, function(err, dir) {
+    dive(process.cwd() + baseDir, { recursive: false, directories: false, files: true }, function(err, dir) {
           if (err) throw err;
           listValues.push(dir.split(baseDir)[1]);
     }); 
-}
-refreshListValues(); //gets called when the app is loaded for the first time and any time a change to the file structure is changed
+};
+//gets called when the app is loaded for the first time and any time a change to the file structure is changed
+refreshListValues(); 
 
 
 //returns an object that lists the file structure, 
 expressapp.get('/list', function(req, res) {
     res.setHeader('Content-Type', 'application/json');
     res.send({ 'files': listValues });
-})
-
-//endpoint for serving up the data that is needed to render a full view 
-expressapp.get('/data', function(req, res) { 
-    res.setHeader('Content-Type', 'application/json');
-    var dataObj = {}
-    // loop over each of the apps/folders and do a readfile on each of them
-    for (var i=0; i < listValues.length; i++) {
-        var file = fs.readFileSync('apps/' + listValues[i] + '/config.json', 'utf8');
-        var newKey = listValues[i];
-        dataObj[newKey] = JSON.parse(file);
-    }
-    res.send(dataObj);
 })
 
 

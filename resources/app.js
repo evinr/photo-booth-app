@@ -45,7 +45,7 @@ window.addEventListener('DOMContentLoaded', function() {
 		video.play();
 	}, errBack);
 
-	// // Trigger to take pic
+	// // Trigger to take pic needs to get added after DOM is good
 	document.getElementById('snap').addEventListener('click', function() {
 		// need to do some binding or something I am too tired to deal with right now
 		context.drawImage(video, 0, 0, 320, 240);
@@ -54,27 +54,16 @@ window.addEventListener('DOMContentLoaded', function() {
 
 }, false);
 
-// // Trigger photo take
-// document.getElementById('snap').addEventListener('click', function() {
-// 	context.drawImage(video, 0, 0, 320, 240);
-
-// Converts canvas to an image
-function convertCanvasToImage(canvas) {
-	var image = new Image();
-	image.src = canvas.toDataURL("image/png");
-	return image;
-}
 
 function uploadImage() {
-	console.log('asdf')
     var xhr = new XMLHttpRequest();
 
-    xhr.open("POST","/doPost",true);    
-
-    var file = convertCanvasToImage(canvas);
-    if(file) {
+    xhr.open('POST','/uploadImage',true);    
+    var base64ImageValue = canvas.toDataURL('image/png')
+ 
+    if(base64ImageValue) {
 		var formdata = new FormData();
-		formdata.append("pic",file);
+		formdata.append('pic',base64ImageValue);
 		xhr.send(formdata);
 	}
     xhr.onreadystatechange = function(){
@@ -84,13 +73,3 @@ function uploadImage() {
 	    }
 	};
 }
-
-document.addEventListener('keydown', function(event) {
-		if (event.keyCode == 37) {
-			context.drawImage(video, 0, 0, 320, 240);
-			// TODO: Make XHR request to backend with image file or base64 string
-		}
-		if (event.keyCode == 39) {
-			context.drawImage(video, 0, 0, 320, 240);
-		}
-	}, true);
