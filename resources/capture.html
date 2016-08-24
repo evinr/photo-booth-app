@@ -93,6 +93,7 @@ window.addEventListener('DOMContentLoaded', function() {
 		// need to do some binding or something I am too tired to deal with right now
 		context.drawImage(video, 0, 0, 320, 240);
 		uploadImage();
+		// initiateCountdown();
 	});
 
 }, false);
@@ -104,18 +105,26 @@ function uploadImage() {
     xhr.open('POST','/uploadImage',true);    
     var base64ImageValue = canvas.toDataURL('image/png')
  
-    if(base64ImageValue) {
+    if(base64ImageValue && navigator.getUserMedia) {
 		var formdata = new FormData();
 		formdata.append('pic',base64ImageValue);
 		xhr.send(formdata);
 	}
 }
 
-//TODO: Filter overlays
-//TODO: Swipe to change overlays
+var initiateCountdown = function () {
+	// Starts countdown on the screen: 3...2...1...Flash/Snap Animation
+};
+
+var disableState = function () {
+	// place a div over the button to render it unclickable
+};
+
 //TODO: Countdown overlay timer delay
 //TODO: Add scrim to button and disable state
 
+//TODO: Filter overlays
+//TODO: Swipe to change overlays
 
 //TODO: Create toggle for modes (camera and display)
 //TODO: Create share to allow for multiple camera inputs to the same event
