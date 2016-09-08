@@ -8,6 +8,7 @@
 	<style type='text/css'>
 		body {
 			background-color: black;
+			overflow-y: none;
 		}
 		video {
 			width: 100%;
@@ -16,16 +17,21 @@
 			top: 0;
 			right: 0;
 		}
-
+ 
 		canvas {
 			display: none;
 		}
 
+		button:active {
+			background-color: #e74c3c;
+		}
+
 		button {
+			z-index: 999999;
 			border-radius: 50%;
-			height:  50px;
-			width:  50px;
-			background-color:  red;
+			height:  100px;
+			width:  100px;
+			background-color: #c0392b;
 			position: absolute;
 			bottom: 10%;
 			right:  50%;
@@ -34,20 +40,55 @@
 		    outline: 0;
 		 	text-transform: uppercase;
 		    box-shadow: none;
+		    background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDYwIDYwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA2MCA2MDsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI2NHB4IiBoZWlnaHQ9IjY0cHgiPgo8Zz4KCTxwYXRoIGQ9Ik01NS4yMDEsMTUuNWgtOC41MjRsLTQtMTBIMTcuMzIzbC00LDEwSDEydi01SDZ2NUg0Ljc5OUMyLjE1MiwxNS41LDAsMTcuNjUyLDAsMjAuMjk5djI5LjM2OCAgIEMwLDUyLjMzMiwyLjE2OCw1NC41LDQuODMzLDU0LjVoNTAuMzM0YzIuNjY1LDAsNC44MzMtMi4xNjgsNC44MzMtNC44MzNWMjAuMjk5QzYwLDE3LjY1Miw1Ny44NDgsMTUuNSw1NS4yMDEsMTUuNXogTTgsMTIuNWgydjNIOCAgIFYxMi41eiBNNTgsNDkuNjY3YzAsMS41NjMtMS4yNzEsMi44MzMtMi44MzMsMi44MzNINC44MzNDMy4yNzEsNTIuNSwyLDUxLjIyOSwyLDQ5LjY2N1YyMC4yOTlDMiwxOC43NTYsMy4yNTYsMTcuNSw0Ljc5OSwxNy41SDZoNiAgIGgyLjY3N2w0LTEwaDIyLjY0Nmw0LDEwaDkuODc4YzEuNTQzLDAsMi43OTksMS4yNTYsMi43OTksMi43OTlWNDkuNjY3eiIgZmlsbD0iIzAwMDAwMCIvPgoJPHBhdGggZD0iTTMwLDE0LjVjLTkuOTI1LDAtMTgsOC4wNzUtMTgsMThzOC4wNzUsMTgsMTgsMThzMTgtOC4wNzUsMTgtMThTMzkuOTI1LDE0LjUsMzAsMTQuNXogTTMwLDQ4LjVjLTguODIyLDAtMTYtNy4xNzgtMTYtMTYgICBzNy4xNzgtMTYsMTYtMTZzMTYsNy4xNzgsMTYsMTZTMzguODIyLDQ4LjUsMzAsNDguNXoiIGZpbGw9IiMwMDAwMDAiLz4KCTxwYXRoIGQ9Ik0zMCwyMC41Yy02LjYxNywwLTEyLDUuMzgzLTEyLDEyczUuMzgzLDEyLDEyLDEyczEyLTUuMzgzLDEyLTEyUzM2LjYxNywyMC41LDMwLDIwLjV6IE0zMCw0Mi41Yy01LjUxNCwwLTEwLTQuNDg2LTEwLTEwICAgczQuNDg2LTEwLDEwLTEwczEwLDQuNDg2LDEwLDEwUzM1LjUxNCw0Mi41LDMwLDQyLjV6IiBmaWxsPSIjMDAwMDAwIi8+Cgk8cGF0aCBkPSJNNTIsMTkuNWMtMi4yMDYsMC00LDEuNzk0LTQsNHMxLjc5NCw0LDQsNHM0LTEuNzk0LDQtNFM1NC4yMDYsMTkuNSw1MiwxOS41eiBNNTIsMjUuNWMtMS4xMDMsMC0yLTAuODk3LTItMnMwLjg5Ny0yLDItMiAgIHMyLDAuODk3LDIsMlM1My4xMDMsMjUuNSw1MiwyNS41eiIgZmlsbD0iIzAwMDAwMCIvPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=);
+		    background-repeat: no-repeat;
+			background-position: center; 
+		}
+
+		button#snap.capturing {
+			background-image: none;
+			font-size: 50px;
+		}
+
+		button#snap.snap {
+			background-image: none;
+			font-size: 20px;
+		}
+
+		.scrim {
+			z-index: 9999;
+			position: absolute;
+			top: -50%;
+    		right: 50%;
+			transform: translate(50%,50%);
+			color: white;
+			width: 100%;
+			height: 100%;
+			background-color: #ecf0f1;
+			opacity: 0.4;
+			/* transition: width 1s; */
+			transition: width 400ms ease-in-out;
+			display: none;
+		}
+
+		div.white-out {
+			display: block;
 		}
 	   
 	</style>
 </head>
 <body>
+	<div class='scrim'></div>
 	<video id='video' width='1280' height='720' autoplay>
 		Your browser does not support the video tag.
 	</video>
-	<button id='snap'>Snap</button>
+	<button id='snap'></button>
 	<canvas id='canvas' width='320' height='240'></canvas>	
 </body>
 
 <script>
 var context; // Lazy/dumb hoisting
+var lazyButtonDisable;
 
 //Standarized the getUserMedia function across all of the different browsers
 navigator.getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
@@ -90,10 +131,11 @@ window.addEventListener('DOMContentLoaded', function() {
 
 	// // Trigger to take pic needs to get added after DOM is good
 	document.getElementById('snap').addEventListener('click', function() {
-		// need to do some binding or something I am too tired to deal with right now
-		context.drawImage(video, 0, 0, 320, 240);
-		uploadImage();
-		// initiateCountdown();
+		// need to do some binding or something I am too tired to deal with right no
+		if (!lazyButtonDisable) {
+			initiateCountdown();
+		}
+		
 	});
 
 }, false);
@@ -113,12 +155,49 @@ function uploadImage() {
 }
 
 var initiateCountdown = function () {
+	// debugger
+	lazyButtonDisable = true;
 	// Starts countdown on the screen: 3...2...1...Flash/Snap Animation
+	capturingMode(3);
+	window.setTimeout(function(){capturingMode(2)}, 1000);
+	window.setTimeout(function(){capturingMode(1)}, 2000);
+	window.setTimeout(function(){renderPsuedoFlashAnimation()}, 3000);
+	// need to disable the button
+
+	// renderPsuedoFlashAnimation();
 };
 
-var disableState = function () {
-	// place a div over the button to render it unclickable
-};
+
+
+var capturingMode = function (displayString) {
+	document.getElementById('snap').className = 'capturing'
+	document.getElementById('snap').innerHTML = displayString;
+}
+
+var renderPsuedoFlashAnimation = function () {
+	// set a div covering the entire screen to 100% opacity and have an animation to make it look smoother
+	// document.getElementsByClassName('scrim')[0].style.display = 'block';
+	document.getElementsByClassName('scrim')[0].className += ' white-out';
+
+	
+	window.setTimeout(function() {
+		// document.getElementsByClassName('scrim')[0].style.display = 'none';
+		document.getElementsByClassName('scrim')[0].className = 'scrim';
+		document.getElementById('snap').className = '';
+		document.getElementById('snap').innerHTML = ''
+	}, 200);
+	
+	context.drawImage(video, 0, 0, 320, 240);
+	uploadImage();
+	lazyButtonDisable = false;
+	document.getElementById('snap').className = 'snap';
+	document.getElementById('snap').innerHTML = 'snap'
+
+}
+
+// var disableState = function () {
+// 	// place a div over the button to render it unclickable
+// };
 
 //TODO: Countdown overlay timer delay
 //TODO: Add scrim to button and disable state

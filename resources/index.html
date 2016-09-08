@@ -1,7 +1,7 @@
 <!DOCTYPE html>
   <html>
     <head>
-      <title>Image Display for Photo Booth</title>
+      <title>D'oro da Sacramenti Regional Photo's</title>
       <meta name='viewport' content='width=device-width, initial-scale=1.0' />
       <style type='text/css'>
         /* Loading Spinner 
@@ -81,7 +81,7 @@
   </head>
   <body>
     <header>
-      <h1>Image Display for Photo Booth</h1>
+      <h1>D'oro da Sacramenti Regional Photo's</h1>
     </header>
     <div class='loader'>Loading...</div>
       <main class='container'>
@@ -89,16 +89,26 @@
       <div class='modalDialog' role='dialog' aria-labelledby='myDialog'>
       	<div>
           <button id='close' title='Close' class='flat-button close'>X</button>
-          <h2 id='myDialog'>Email Me</h2>
+          <h2 id='myDialog'>Download or Email</h2>
           <section id='modalViewPage'>
             <section id='viewPageWrapper'>
           
             </section>  
           </section>
-          <button class='flat-button prev'>Previous</button>
-          <button class='flat-button next'>Next</button>
+          <form id='editor' onsubmit='return false';>
+            <fieldset class='material'>
+            <input type='email' id='email'>
+            <hr>
+            <label>Email Address</label>
+            </fieldset>
+            <!-- <input type='submit' class='form-button flat-button' value='Submit'> -->
+          </form>
+          <!-- <button class='flat-button prev'>Download</button> -->
+          <a class='download-link prev flat-button' href='' download>Download</a>
+          <button class='flat-button next'>Email Me</button>
       	</div>
       </div>
+      <a download>
   </body>
   <script src='/app.js'></script>
   <link rel='stylesheet' type='text/css' href='/style.css'>

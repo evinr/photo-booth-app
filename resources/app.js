@@ -20,6 +20,7 @@ function loadData() {
 
 
 function updateListener (targetId) {
+
 	var targetField = targetId.split('-')[0];
 	var targetElementNumber = parseFloat(targetId.split('-')[1]);
 	
@@ -33,33 +34,43 @@ function updateListener (targetId) {
 	}
 
 	if (targetField === 'next') {
-		renderLightbox(targetElementNumber + 1);
+		// renderLightbox(targetElementNumber + 1);
+		//submit for to the BE to be written to the FS
+		 uploadEmail(document.getElementById('email').value, targetElementNumber);
+
+		 closeLightbox();
 	}
 
-	if (targetField === 'prev') {
-		renderLightbox(targetElementNumber - 1);
-	}
 
+	// // Web App Basics 
+	// if (targetField === 'new') {
+	// 	createNewInstance();
+	// }
 
-	// Web App Basics 
-	if (targetField === 'new') {
-		createNewInstance();
-	}
+	// if (targetField === 'save') {
+	// 	saveQuestionToInstance(targetId);
+	// }
 
-	if (targetField === 'save') {
-		saveQuestionToInstance(targetId);
-	}
+	// if (targetField === 'browse') {
+	// 	// TODO: Retrieve all of the instances from the device/cloud
+	// 	// TODO: Render results to the lightbox
+	// }
 
-	if (targetField === 'browse') {
-		// TODO: Retrieve all of the instances from the device/cloud
-		// TODO: Render results to the lightbox
-	}
-
-	if (targetField === 'share') {
-		// TODO: Create a way to share via a hashmap or string
+	// if (targetField === 'share') {
+	// 	// TODO: Create a way to share via a hashmap or string
 		
-	}
+	// }
 
+}
+
+function uploadEmail(address, file) {
+    var xhr = new XMLHttpRequest();
+
+    xhr.open('POST','/uploadEmail',true);    
+	var formdata = new FormData();
+	formdata.append('email',address);
+	formdata.append('image',file);
+	xhr.send(formdata);
 }
 
 function launchLightbox() {
@@ -104,14 +115,7 @@ function saveQuestionToInstance () {
 }
 
 function renderLightbox(target) {
-	// check to see if we need to loop based on numberOfElements
-	if ( target === -1) {
-		target = data.length - 1;
-	}
-	else if (target === data.length -1) {
-		target = 0;
-	}
-
+	
 	// clean the section
 	var parentElem = document.getElementById('modalViewPage');
 	var childElem = document.getElementById('viewPageWrapper');
@@ -127,21 +131,23 @@ function renderLightbox(target) {
 	var viewPageElement = document.getElementById('viewPageWrapper');
 
 	// email address collection form
-
-	// TODO: Make this a dropdown for an easy way to switch categories
 	var category = document.createElement('p');
-	category.appendChild(document.createTextNode('test string'));
+	category.appendChild(document.createTextNode('Enter your EMAIL address below to have this photo emailed to you once we get back to the default world. Otherwise you can click the DOWNLOAD button below.'));
 	viewPageElement.appendChild(category);
 
-	var save = document.createElement('button');
-	save.className = 'flat-button save';
-	save.id = 'save-' + target;
-	save.appendChild(document.createTextNode('SAVE'));
-	viewPageElement.appendChild(save);
+	// var save = document.createElement('button');
+	// save.className = 'flat-button save';
+	// save.id = 'save-' + target;
+	// save.appendChild(document.createTextNode('SAVE'));
+	// viewPageElement.appendChild(save);
+
+	// form for email
+	// var email - document.createElement
+
+	//update the href on the 
+	document.getElementsByClassName('download-link')[0].href = '/images/' + target + '.png'
 
 	//update the ID's on the previous and next buttons
-	var prevButton = document.getElementsByClassName('prev')[0];
-	prevButton.id = 'prev-' + target;
 	var nextButton = document.getElementsByClassName('next')[0];
 	nextButton.id = 'next-' + target;
 
@@ -150,7 +156,7 @@ function renderLightbox(target) {
 function renderData (dataObj) {
 	data = dataObj.files;
 	numberOfElements = data.length;
-
+// debugger
 	// images
 	for (i = 0; i < data.length; i++) {
 			var card = document.createElement('div');
@@ -158,7 +164,7 @@ function renderData (dataObj) {
 			card.style.backgroundImage = 'url("/images/' + data[i] + '")';
 
 				var menu = document.createElement('button');
-				menu.id = 'menu-' + i;
+				menu.id = 'menu-' + data[i].split('.')[0];
 				menu.className = 'menu';
 
 					for (n = 0; n < 3; n++) {

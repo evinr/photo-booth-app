@@ -57,6 +57,24 @@ expressapp.post('/uploadImage', function(req, res){
 })
 
 
+//Endpoint for uploading an image via POST as a base-64 string
+expressapp.post('/uploadEmail', function(req, res){
+    var email = req.param('email');
+    var image = req.param('image');
+    var timeStamp = Date.now();
+
+    var obj = { 'email': email, 'image': image, 'time': timeStamp };
+
+    var file = JSON.parse(fs.readFileSync('emails.json', 'utf8'));
+    file.push(obj)
+    var dataToWrite = JSON.stringify(file, null, 4);
+    fs.writeFileSync('emails.json', dataToWrite, 'utf8');
+
+    res.send('The post was successful');
+    // reset the list of images in the for the frontend API
+    refreshListValues();
+})
+
 //need to be able to store file structure as a global object
 var refreshListValues = function () {
     listValues = [];
