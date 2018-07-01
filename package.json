@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "./dirEnsure.sh"
+    "postinstall": "./scripts/dirEnsure.sh"
   },
   "repository": {
     "type": "git",
@@ -22,7 +22,6 @@
     "dive": "^0.5.0",
     "express": "latest",
     "express-fileupload": "0.0.5",
-    "firebase": "latest",
     "nodemon": "latest",
     "request": "latest"
   }

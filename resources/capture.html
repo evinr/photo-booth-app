@@ -152,6 +152,16 @@ function uploadImage() {
 		formdata.append('pic',base64ImageValue);
 		xhr.send(formdata);
 	}
+
+	//TODO: temp to compare the webcam vs the DSLR
+	triggerDSLR();
+}
+
+function triggerDSLR() {
+	var xhr = new XMLHttpRequest();
+
+    xhr.open('GET','/trigger',true);    
+	xhr.send(formdata);
 }
 
 var initiateCountdown = function () {
@@ -162,6 +172,7 @@ var initiateCountdown = function () {
 	window.setTimeout(function(){capturingMode(2)}, 1000);
 	window.setTimeout(function(){capturingMode(1)}, 2000);
 	window.setTimeout(function(){renderPsuedoFlashAnimation()}, 3000);
+	// TODO: Need a hold here till DSLR is done capturing
 	// need to disable the button
 
 	// renderPsuedoFlashAnimation();
