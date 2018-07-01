@@ -5,30 +5,11 @@ var expressapp = express();
 var bodyParser = require('body-parser');
 var exec = require('child_process').exec;
 var dive = require('dive');
-
 var fileUpload = require('express-fileupload'); // Not sure why removing this breaks upload ability
 
-//SSL Requirements
-// var http = require('http');
-// var https = require('https');
-// var privateKey  = fs.readFileSync('sslcert/server.key', 'utf8');
-// var certificate = fs.readFileSync('sslcert/server.crt', 'utf8');
-
-// var credentials = {key: privateKey, cert: certificate};
-// var express = require('express');
-// var app = express();
-
-// // your express configuration here
-// var httpServer = http.createServer(expressapp);
-// var httpsServer = https.createServer(credentials, expressapp);
-
-// httpServer.listen(8081);
-// httpsServer.listen(8443);
 
 
 
-// Needed for cloud sync functionality
-// var Firebase = require('firebase');
 
 //Configuring middleware
 expressapp.use(bodyParser())
@@ -44,7 +25,9 @@ expressapp.use(express.static(__dirname + '/resources'));
 //Maps to the images that get captured
 expressapp.use('/images', express.static(baseDir));
 
+
 //Endpoint for uploading an image via POST as a base-64 string
+// No longer Needed
 expressapp.post('/uploadImage', function(req, res){
     var image = req.param('pic');
     var fileName = Date.now();
@@ -87,6 +70,30 @@ var refreshListValues = function () {
 refreshListValues(); 
 
 
+expressapp.get('/trigger', function(req, res) {
+    // Data collection locally  should include the number of people present
+
+    var fileName = Date.now();
+    // exec('gphoto2 --capture-image-and-download --filename "/photos/rr.jpeg"')
+exec(`gphoto2 --capture-image-and-download --filename "${__dirname}/photos/${fileName}.jpeg"`
+    , (err, stdout, stderr) => {
+  if (err) {
+    // node couldn't execute the command
+    // TODO: need to have fallback: need a queing for this
+    // TODO: determine rate limiting: 7 seconds
+    return;
+  }
+
+  // the *entire* stdout and stderr (buffered)
+  console.log(`stdout: ${stdout}`);
+  console.log(`stderr: ${stderr}`);
+});
+    // respond with the image so that it can be shown for a second
+        // send the url of the image on disk?
+    res.send('I am the image');
+})
+
+
 //returns an object that lists the file structure, 
 expressapp.get('/list', function(req, res) {
     res.setHeader('Content-Type', 'application/json');
@@ -94,24 +101,10 @@ expressapp.get('/list', function(req, res) {
     refreshListValues(); //make sure to refresh the list just incase anything outside the happy path is up-to-date
 })
 
+// TODO: Timelapse every hour
+// this should really be a cron job
+// exec(`gphoto2 --capture-image-and-download --filename "${__dirname}/timelapse/${fileName}.jpeg"`
 
-
-
-// // Firebase demo
-// expressapp.get('/fireset', function(req, res) {
-//     var dataRef = new Firebase('https://testmcdemo.firebaseio.com/');
-//     dataRef.set({"stuff":{"junk":"hello world!","more":"asdfasdfasdf"}});
-//     //send confirmation it was set
-//     res.send('data was set!');
-// })
-
-// expressapp.get('/fireget', function(req, res) {
-//         var dataRef = new Firebase('https://testmcdemo.firebaseio.com/');
-//     dataRef.child("stuff/more").on("value", function(snapshot) {
-//         //          ^^^ path to the data
-//   res.send(snapshot.val());  // Alerts "San Francisco"
-// });
-// })
 
 //Sets up the listener for the express app
 expressapp.listen('8081')
@@ -120,6 +113,6 @@ expressapp.listen('8081')
 
 //Splash screen including the Node JS logo ascii art
 console.log('................................................................................\n.....................................=====......................................\n..................................===========...................................\n...............................=================................................\n............................===========.===========.............................\n..........................==========.......==========...........................\n.......................===========...........===========........................\n....................===========.................===========.....................\n.................===========.......................===========..................\n...............==========.............................==========................\n............==========...................................==========.............\n.........===========.......................................===========..........\n.......==========.............................................==========........\n......========...................................................========.......\n......=====.........................................................=====.......\n......=====.........................................................=====.......\n......=====..............======........=================............=====.......\n......=====..............======......=====================..........=====.......\n......=====..............======....=========================........=====.......\n......=====..............======....======............=======........=====.......\n......=====..............======...======...............======.......=====.......\n......=====..............======...======................=====.......=====.......\n......=====..............======...========..........................=====.......\n......=====..............======....================.................=====.......\n......=====..............======.....======================..........=====.......\n......=====..............======........=====================........=====.......\n......=====..............======..............================.......=====.......\n......=====..............======........................=======......=====.......\n......=====..............======..======.................======......=====.......\n......=====..............======..======.................======......=====.......\n......=====..............======...======................======......=====.......\n......=====..............======...=========..........========.......=====.......\n......=====..............======.....========================........=====.......\n......=====..............======.......====================..........=====.......\n......=====..............======...........============..............=====.......\n......======.............======.....................................=====.......\n......========...........======..................................========.......\n.......==========........======...............................==========........\n.........===========...=======.............................===========..........\n............==================..........................===========.............\n...............==============.........................==========................\n..................========.........................==========...................\n................................................==========......................\n.............................=====...........===========........................\n...........................==========.....===========...........................\n.............................==========.==========..............................\n................................===============.................................\n...................................==========...................................\n.....................................=====......................................\n................................................................................\n');
-console.log('          Node Express Server Demo Platform Started at localhost:8081');
+console.log('          Photo Booth Platform Started at localhost:8081');
 
 exports = module.exports = expressapp;

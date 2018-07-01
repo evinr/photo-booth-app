@@ -145,7 +145,7 @@ function renderLightbox(target) {
 	// var email - document.createElement
 
 	//update the href on the 
-	document.getElementsByClassName('download-link')[0].href = '/images/' + target + '.png'
+	document.getElementsByClassName('download-link')[0].href = '/images/' + target + '.jpeg'
 
 	//update the ID's on the previous and next buttons
 	var nextButton = document.getElementsByClassName('next')[0];
