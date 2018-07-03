@@ -165,6 +165,7 @@ var initiateCountdown = function () {
 	// debugger
 	lazyButtonDisable = true;
 	// Starts countdown on the screen: 3...2...1...Flash/Snap Animation
+	triggerDSLR();
 	capturingMode(3);
 	window.setTimeout(function(){capturingMode(2)}, 1000);
 	window.setTimeout(function(){capturingMode(1)}, 2000);
@@ -198,7 +199,7 @@ var renderPsuedoFlashAnimation = function () {
 	context.drawImage(video, 0, 0, 320, 240);
 	// uploadImage();
 	//TODO: temp to compare the webcam vs the DSLR
-	triggerDSLR();
+	// triggerDSLR();
 	lazyButtonDisable = false;
 	document.getElementById('snap').className = 'snap';
 	document.getElementById('snap').innerHTML = 'snap'
