@@ -72,7 +72,7 @@ refreshListValues();
 
 expressapp.get('/trigger', function(req, res) {
     // Data collection locally  should include the number of people present
-
+    console.log('yep')
     var fileName = Date.now();
     // exec('gphoto2 --capture-image-and-download --filename "/photos/rr.jpeg"')
 exec(`gphoto2 --capture-image-and-download --filename "${__dirname}/photos/${fileName}.jpeg"`

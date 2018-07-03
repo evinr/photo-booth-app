@@ -6,7 +6,7 @@ echo "testing"
 
 # 		check and install hostapd
 
-sudo apt-get install hostapd dnsmasq
+sudo apt-get install hostapd dnsmasq gphoto2 chromium
 
 zcat /usr/share/doc/hostapd/examples/hostapd.conf.gz | sudo tee -a /etc/hostapd/hostapd.conf
 

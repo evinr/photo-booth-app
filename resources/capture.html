@@ -130,7 +130,7 @@ window.addEventListener('DOMContentLoaded', function() {
 	}, errBack);
 
 	// // Trigger to take pic needs to get added after DOM is good
-	document.getElementById('snap').addEventListener('click', function() {
+	document.body.addEventListener('click', function() {
 		// need to do some binding or something I am too tired to deal with right no
 		if (!lazyButtonDisable) {
 			initiateCountdown();
@@ -152,9 +152,6 @@ function uploadImage() {
 		formdata.append('pic',base64ImageValue);
 		xhr.send(formdata);
 	}
-
-	//TODO: temp to compare the webcam vs the DSLR
-	triggerDSLR();
 }
 
 function triggerDSLR() {
@@ -199,7 +196,9 @@ var renderPsuedoFlashAnimation = function () {
 	}, 200);
 	
 	context.drawImage(video, 0, 0, 320, 240);
-	uploadImage();
+	// uploadImage();
+	//TODO: temp to compare the webcam vs the DSLR
+	triggerDSLR();
 	lazyButtonDisable = false;
 	document.getElementById('snap').className = 'snap';
 	document.getElementById('snap').innerHTML = 'snap'
