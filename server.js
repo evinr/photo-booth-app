@@ -75,22 +75,28 @@ expressapp.get('/trigger', function(req, res) {
     console.log('yep')
     var fileName = Date.now();
     // exec('gphoto2 --capture-image-and-download --filename "/photos/rr.jpeg"')
-exec(`gphoto2 --capture-image-and-download --filename "${__dirname}/photos/${fileName}.jpeg"`
-    , (err, stdout, stderr) => {
-  if (err) {
-    // node couldn't execute the command
-    // TODO: need to have fallback: need a queing for this
-    // TODO: determine rate limiting: 7 seconds
-    return;
-  }
+    exec(`gphoto2 --capture-image-and-download --filename "${__dirname}/photos/${fileName}.jpeg"`
+        , (err, stdout, stderr) => {
+      if (err) {
+        // node couldn't execute the command
+        // TODO: need to have fallback: need a queing for this
+        return;
+      }
+      if (stdout) {
+        // TODO: give a response that the capture group can know to release their pose
+        res.send('I am the image');
+      }
+      else {
+        res.send('I am the image');
+      }
 
-  // the *entire* stdout and stderr (buffered)
-  console.log(`stdout: ${stdout}`);
-  console.log(`stderr: ${stderr}`);
-});
+      // the *entire* stdout and stderr (buffered)
+      console.log(`stdout: ${stdout}`);
+      console.log(`stderr: ${stderr}`);
+    });
     // respond with the image so that it can be shown for a second
         // send the url of the image on disk?
-    res.send('I am the image');
+    // res.send('I am the image');
 })
 
 
