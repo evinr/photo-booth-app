@@ -23,6 +23,7 @@
     "express": "latest",
     "express-fileupload": "0.0.5",
     "nodemon": "latest",
-    "request": "latest"
+    "request": "latest",
+    "serialport": "^6.2.2"
   }
 }

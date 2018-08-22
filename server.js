@@ -7,9 +7,21 @@ var exec = require('child_process').exec;
 var dive = require('dive');
 var fileUpload = require('express-fileupload'); // Not sure why removing this breaks upload ability
 
+var SerialPort = require('serialport');
+var port = new SerialPort('/dev/ttyUSB0', {
+  baudRate: 9600
+});
 
 
+// port.write('A00101A2');
+port.write('4130303130314132');
 
+port.write('4130303130314132', function(err) {
+  if (err) {
+    return console.log('Error on write: ', err.message);
+  }
+  console.log('Sucess');
+});
 
 //Configuring middleware
 expressapp.use(bodyParser())
@@ -74,6 +86,7 @@ expressapp.get('/trigger', function(req, res) {
     // Data collection locally  should include the number of people present
     console.log('yep')
     var fileName = Date.now();
+    exec('python scripts/open-relay.py');
     // exec('gphoto2 --capture-image-and-download --filename "/photos/rr.jpeg"')
     exec(`gphoto2 --capture-image-and-download --filename "${__dirname}/photos/${fileName}.jpeg"`
         , (err, stdout, stderr) => {
@@ -90,6 +103,8 @@ expressapp.get('/trigger', function(req, res) {
         res.send('I am the image');
       }
 
+      // turns off the lights
+      exec('python scripts/close-relay.py');
       // the *entire* stdout and stderr (buffered)
       console.log(`stdout: ${stdout}`);
       console.log(`stderr: ${stderr}`);
