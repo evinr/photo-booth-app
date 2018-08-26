@@ -72,7 +72,7 @@ expressapp.get('/trigger', function(req, res) {
     // Data collection locally  should include the number of people present
     console.log('yep')
     var fileName = Date.now();
-    exec('python scripts/open-relay.py');
+    exec('python' + __dirname + 'scripts/open-relay.py');
 
     const commandOptions = ['--capture-image-and-download', `--filename=${__dirname}/photos/${fileName}.jpeg`];
 // const commandOptions = ['-l'];
@@ -110,7 +110,7 @@ expressapp.get('/trigger', function(req, res) {
         else {
           res.status(404).send('error')
         }
-        exec('python scripts/close-relay.py');
+        exec('python' + __dirname + 'scripts/close-relay.py');
         // add another script to ensure this is getting fired
     } );
 
