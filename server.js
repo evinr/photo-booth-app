@@ -67,12 +67,29 @@ var refreshListValues = function () {
 //gets called when the app is loaded for the first time and any time a change to the file structure is changed
 refreshListValues(); 
 
+expressapp.get('/on', function(req, res) {
+  try {
+    const commandStff = `python ${__dirname}/scripts/open-relay.py`;
+    console.log(commandStff)
+    exec(commandStff); 
+    res.send('should be open') 
+  }
+  catch (e) {
+    res.send(e)
+  }
+  // exec('python' + __dirname + '/scripts/open-relay.py');
+});
+
+expressapp.get('/off', function(req, res) {
+  exec('python' + __dirname + '/scripts/close-relay.py');
+});
 
 expressapp.get('/trigger', function(req, res) {
     // Data collection locally  should include the number of people present
     console.log('yep')
     var fileName = Date.now();
-    exec('python' + __dirname + 'scripts/open-relay.py');
+    const openCommand = 'python' + __dirname + '/scripts/open-relay.py'
+    exec(`python ${__dirname}/scripts/open-relay.py`);
 
     const commandOptions = ['--capture-image-and-download', `--filename=${__dirname}/photos/${fileName}.jpeg`];
 // const commandOptions = ['-l'];
@@ -110,7 +127,8 @@ expressapp.get('/trigger', function(req, res) {
         else {
           res.status(404).send('error')
         }
-        exec('python' + __dirname + 'scripts/close-relay.py');
+        const closeCommand = 'python' + __dirname + '/scripts/close-relay.py';
+        exec(`python ${__dirname}/scripts/close-relay.py`);
         // add another script to ensure this is getting fired
     } );
 
