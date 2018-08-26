@@ -7,21 +7,7 @@ var exec = require('child_process').exec;
 var dive = require('dive');
 var fileUpload = require('express-fileupload'); // Not sure why removing this breaks upload ability
 
-var SerialPort = require('serialport');
-var port = new SerialPort('/dev/ttyUSB0', {
-  baudRate: 9600
-});
 
-
-// port.write('A00101A2');
-port.write('4130303130314132');
-
-port.write('4130303130314132', function(err) {
-  if (err) {
-    return console.log('Error on write: ', err.message);
-  }
-  console.log('Sucess');
-});
 
 //Configuring middleware
 expressapp.use(bodyParser())
@@ -87,28 +73,77 @@ expressapp.get('/trigger', function(req, res) {
     console.log('yep')
     var fileName = Date.now();
     exec('python scripts/open-relay.py');
-    // exec('gphoto2 --capture-image-and-download --filename "/photos/rr.jpeg"')
-    exec(`gphoto2 --capture-image-and-download --filename "${__dirname}/photos/${fileName}.jpeg"`
-        , (err, stdout, stderr) => {
-      if (err) {
-        // node couldn't execute the command
-        // TODO: need to have fallback: need a queing for this
-        return;
-      }
-      if (stdout) {
-        // TODO: give a response that the capture group can know to release their pose
-        res.send('I am the image');
-      }
-      else {
-        res.send('I am the image');
-      }
 
-      // turns off the lights
-      exec('python scripts/close-relay.py');
-      // the *entire* stdout and stderr (buffered)
-      console.log(`stdout: ${stdout}`);
-      console.log(`stderr: ${stderr}`);
-    });
+    const commandOptions = ['--capture-image-and-download', `--filename=${__dirname}/photos/${fileName}.jpeg`];
+// const commandOptions = ['-l'];
+    console.log(commandOptions)
+    console.log(typeof commandOptions)
+    const
+        { spawn } = require( 'child_process' ),
+        // gphoto2 = spawn('gphoto2', ['--capture-image-and-download', '--filename "/photos/aaa.jpeg"']);
+        // spawn trips over " so it just removes them for you with no messaging 
+        // gphoto2 = spawn('gphoto2', ['--capture-image-and-download']);
+        gphoto2 = spawn('gphoto2', commandOptions);
+
+        // gphoto2 = spawn(`'ls -l'`);
+
+
+    let exitedError = false;
+
+    gphoto2.stdout.on( 'data', data => {
+        console.log( `stdout: ${data}` );
+    } );
+
+    gphoto2.stderr.on( 'data', data => {
+        console.log( `stderr: ${data}` );
+        // res.send('error');
+        // cant set the response headers in here so just set a flag that gets checked on close
+        exitedError = true;
+    } );
+
+    gphoto2.on( 'close', code => {
+        console.log( `child process exited with code ${code}` );
+
+        if (!exitedError) {
+          res.send('okay')
+        }
+        else {
+          res.status(404).send('error')
+        }
+        exec('python scripts/close-relay.py');
+        // add another script to ensure this is getting fired
+    } );
+
+
+    // exec('gphoto2 --capture-image-and-download --filename "/photos/rr.jpeg"')
+    // exec(`gphoto2 --capture-image-and-download --filename "${__dirname}/photos/${fileName}.jpeg"`
+    //     , (err, stdout, stderr) => {
+    //   if (err) {
+    //     // node couldn't execute the command
+    //     // TODO: need to have fallback: need a queing for this
+    //     res.status(404).send('error');
+    //     return;
+    //   }
+    //   if (stdout) {
+    //     // TODO: give a response that the capture group can know to release their pose
+    //     res.send('I am the image');
+    //     // turns off the lights
+    //     exec('python scripts/close-relay.py');
+    //   }
+    //   else {
+    //     res.send('I am the image');
+    //     // turns off the lights
+    //     exec('python scripts/close-relay.py');
+    //   }
+
+
+    //   // the *entire* stdout and stderr (buffered)
+    //   console.log(`stdout: ${stdout}`);
+    //   console.log(`stderr: ${stderr}`);
+    // });
+
+          
+
     // respond with the image so that it can be shown for a second
         // send the url of the image on disk?
     // res.send('I am the image');

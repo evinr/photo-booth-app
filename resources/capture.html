@@ -13,10 +13,11 @@
 		}
 		video {
 			width: 100%;
-			height: 100%;
+			height: 120%;
 			position: absolute;
-			top: 0;
+			top: -10%;
 			right: 0;
+			transform: rotate(180deg);
 		}
  
 		canvas {
@@ -24,15 +25,17 @@
 		}
 
 		button:active {
-			background-color: #e74c3c;
+			background-color: #3498db;
 		}
 
 		button {
+		  transition: width 600ms ease-out, height 600ms ease-out;
+
 			z-index: 999999;
 			border-radius: 50%;
 			height:  100px;
 			width:  100px;
-			background-color: #c0392b;
+			background-color: #2980b9;
 			position: absolute;
 			bottom: 10%;
 			right:  50%;
@@ -41,19 +44,18 @@
 		    outline: 0;
 		 	text-transform: uppercase;
 		    box-shadow: none;
-		    background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDYwIDYwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA2MCA2MDsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI2NHB4IiBoZWlnaHQ9IjY0cHgiPgo8Zz4KCTxwYXRoIGQ9Ik01NS4yMDEsMTUuNWgtOC41MjRsLTQtMTBIMTcuMzIzbC00LDEwSDEydi01SDZ2NUg0Ljc5OUMyLjE1MiwxNS41LDAsMTcuNjUyLDAsMjAuMjk5djI5LjM2OCAgIEMwLDUyLjMzMiwyLjE2OCw1NC41LDQuODMzLDU0LjVoNTAuMzM0YzIuNjY1LDAsNC44MzMtMi4xNjgsNC44MzMtNC44MzNWMjAuMjk5QzYwLDE3LjY1Miw1Ny44NDgsMTUuNSw1NS4yMDEsMTUuNXogTTgsMTIuNWgydjNIOCAgIFYxMi41eiBNNTgsNDkuNjY3YzAsMS41NjMtMS4yNzEsMi44MzMtMi44MzMsMi44MzNINC44MzNDMy4yNzEsNTIuNSwyLDUxLjIyOSwyLDQ5LjY2N1YyMC4yOTlDMiwxOC43NTYsMy4yNTYsMTcuNSw0Ljc5OSwxNy41SDZoNiAgIGgyLjY3N2w0LTEwaDIyLjY0Nmw0LDEwaDkuODc4YzEuNTQzLDAsMi43OTksMS4yNTYsMi43OTksMi43OTlWNDkuNjY3eiIgZmlsbD0iIzAwMDAwMCIvPgoJPHBhdGggZD0iTTMwLDE0LjVjLTkuOTI1LDAtMTgsOC4wNzUtMTgsMThzOC4wNzUsMTgsMTgsMThzMTgtOC4wNzUsMTgtMThTMzkuOTI1LDE0LjUsMzAsMTQuNXogTTMwLDQ4LjVjLTguODIyLDAtMTYtNy4xNzgtMTYtMTYgICBzNy4xNzgtMTYsMTYtMTZzMTYsNy4xNzgsMTYsMTZTMzguODIyLDQ4LjUsMzAsNDguNXoiIGZpbGw9IiMwMDAwMDAiLz4KCTxwYXRoIGQ9Ik0zMCwyMC41Yy02LjYxNywwLTEyLDUuMzgzLTEyLDEyczUuMzgzLDEyLDEyLDEyczEyLTUuMzgzLDEyLTEyUzM2LjYxNywyMC41LDMwLDIwLjV6IE0zMCw0Mi41Yy01LjUxNCwwLTEwLTQuNDg2LTEwLTEwICAgczQuNDg2LTEwLDEwLTEwczEwLDQuNDg2LDEwLDEwUzM1LjUxNCw0Mi41LDMwLDQyLjV6IiBmaWxsPSIjMDAwMDAwIi8+Cgk8cGF0aCBkPSJNNTIsMTkuNWMtMi4yMDYsMC00LDEuNzk0LTQsNHMxLjc5NCw0LDQsNHM0LTEuNzk0LDQtNFM1NC4yMDYsMTkuNSw1MiwxOS41eiBNNTIsMjUuNWMtMS4xMDMsMC0yLTAuODk3LTItMnMwLjg5Ny0yLDItMiAgIHMyLDAuODk3LDIsMlM1My4xMDMsMjUuNSw1MiwyNS41eiIgZmlsbD0iIzAwMDAwMCIvPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=);
+		    background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDUxMi4xNzEgNTEyLjE3MSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNTEyLjE3MSA1MTIuMTcxOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjUxMnB4IiBoZWlnaHQ9IjUxMnB4Ij4KPGc+Cgk8Zz4KCQk8cGF0aCBkPSJNNDc5LjA0NiwyODMuOTI1Yy0xLjY2NC0zLjk4OS01LjU0Ny02LjU5Mi05Ljg1Ni02LjU5MkgzNTIuMzA1VjEwLjY2N0MzNTIuMzA1LDQuNzc5LDM0Ny41MjYsMCwzNDEuNjM4LDBIMTcwLjk3MSAgICBjLTUuODg4LDAtMTAuNjY3LDQuNzc5LTEwLjY2NywxMC42Njd2MjY2LjY2N0g0Mi45NzFjLTQuMzA5LDAtOC4xOTIsMi42MDMtOS44NTYsNi41NzFjLTEuNjQzLDMuOTg5LTAuNzQ3LDguNTc2LDIuMzA0LDExLjYyNyAgICBsMjEyLjgsMjEzLjUwNGMyLjAwNSwyLjAwNSw0LjcxNSwzLjEzNiw3LjU1MiwzLjEzNnM1LjU0Ny0xLjEzMSw3LjU1Mi0zLjExNWwyMTMuNDE5LTIxMy41MDQgICAgQzQ3OS43OTMsMjkyLjUwMSw0ODAuNzEsMjg3LjkxNSw0NzkuMDQ2LDI4My45MjV6IiBmaWxsPSIjMDAwMDAwIi8+Cgk8L2c+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==);
 		    background-repeat: no-repeat;
+		    background-size: 75%;
 			background-position: center; 
 		}
 
 		button#snap.capturing {
 			background-image: none;
-			font-size: 50px;
-		}
-
-		button#snap.snap {
-			background-image: none;
-			font-size: 20px;
+			font-size: 150px;
+			height: 1500%;
+			margin-bottom: 200px;
+			width: 100%;
 		}
 
 		.scrim {
@@ -155,12 +157,37 @@ function uploadImage() {
 	}
 }
 
+function errorHandling() {
+	        	document.getElementById('snap').innerHTML = 'ERROR, FIND HEAVEN';
+        	// removes remaining countdown timers
+        	clearTimeout(counter1);
+        	clearTimeout(counter2);
+        	clearTimeout(counter3);
+}
+
 function triggerDSLR() {
 	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+	console.log(xhr)
+        if (xhr.readyState == 4 && xhr.status == 200) {
+        	document.getElementById('snap').classList.remove('capturing');
+			document.getElementById('snap').innerHTML = '';
+			clearTimeout(watchDogTimer)
+        }
+        else if (xhr.readyState == 4 && xhr.status == 404) {
+        	errorHandling();
 
+        }
+    }
     xhr.open('GET','/trigger',true);    
 	xhr.send();
+	watchDogTimer = setTimeout(function(){errorHandling()}, 30000);
 }
+
+var watchDogTimer;
+var counter1;
+var counter2;
+var counter3;
 
 var initiateCountdown = function () {
 	// debugger
@@ -168,9 +195,9 @@ var initiateCountdown = function () {
 	// Starts countdown on the screen: 3...2...1...Flash/Snap Animation
 	triggerDSLR();
 	capturingMode(3);
-	window.setTimeout(function(){capturingMode(2)}, 1000);
-	window.setTimeout(function(){capturingMode(1)}, 2000);
-	window.setTimeout(function(){renderPsuedoFlashAnimation()}, 3000);
+	counter1 = setTimeout(function(){capturingMode(2)}, 1000);
+	counter2 = setTimeout(function(){capturingMode(1)}, 2000);
+	counter3 = setTimeout(function(){renderPsuedoFlashAnimation()}, 3000);
 	// TODO: Need a hold here till DSLR is done capturing
 	// need to disable the button
 
@@ -187,23 +214,17 @@ var capturingMode = function (displayString) {
 var renderPsuedoFlashAnimation = function () {
 	// set a div covering the entire screen to 100% opacity and have an animation to make it look smoother
 	// document.getElementsByClassName('scrim')[0].style.display = 'block';
-	document.getElementsByClassName('scrim')[0].className += ' white-out';
+	// document.getElementsByClassName('scrim')[0].className += ' white-out';
 
 	
-	window.setTimeout(function() {
-		// document.getElementsByClassName('scrim')[0].style.display = 'none';
-		document.getElementsByClassName('scrim')[0].className = 'scrim';
-		document.getElementById('snap').className = '';
-		document.getElementById('snap').innerHTML = ''
-	}, 200);
 	
-	context.drawImage(video, 0, 0, 320, 240);
+	//context.drawImage(video, 0, 0, 320, 240);
 	// uploadImage();
 	//TODO: temp to compare the webcam vs the DSLR
 	// triggerDSLR();
 	lazyButtonDisable = false;
-	document.getElementById('snap').className = 'snap';
-	document.getElementById('snap').innerHTML = 'snap'
+	//document.getElementById('snap').className = 'snap';
+	document.getElementById('snap').innerHTML = 'Hold That Pose';
 
 }
 
